@@ -104,8 +104,9 @@ if not DEBUG:
          }
       }
     
-      prod_db=dj_database_url.config(conn_max_age=600)
+      prod_db=dj_database_url.config(env="CLEARDB_DATABASE_URL",conn_max_age=600)
       DATABASES['default'].update(prod_db)
+      print(DATABASES)
 
     #   Data
     # DATABASES = {
