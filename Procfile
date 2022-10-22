@@ -1,1 +1,1 @@
-web:gunicorn Flists.wsgi
+web: gunicorn Flists.wsgi
