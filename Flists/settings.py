@@ -94,7 +94,8 @@ db_config = dj_database_url.config(default=os.environ.get('CLEARDB_DATABASE_URL'
 # db_config['ATOMIC_REQUESTS'] = True
 
 if not DEBUG: 
-   DATABASES['default'] = dj_database_url.config(default=os.environ.get('CLEARDB_DATABASE_URL'),conn_max_age=600)
+    DATABASES = {'default': {}}
+    DATABASES['default'] = dj_database_url.config(default=os.environ.get('CLEARDB_DATABASE_URL'),conn_max_age=600)
     
     # DATABASES['default'].update(prod_db)
 #   DATABASES = {
