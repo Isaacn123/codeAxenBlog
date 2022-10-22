@@ -1,1 +1,1 @@
-web:gunicorn Flists.wsgi --log-file -
+web:gunicorn Flists.wsgi
