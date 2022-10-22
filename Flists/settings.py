@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -89,19 +90,26 @@ WSGI_APPLICATION = 'Flists.wsgi.application'
 # mysql://bc05818b8689d9:0996cb18@us-cdbr-east-06.cleardb.net/heroku_e51e7f5b0b3de84?reconnect=true
 # mysql://username:password@cleardb-cdbr-endpoint.cleardb.com/database_name
 
+db_config = dj_database_url.config(default=os.environ.get('CLEARDB_DATABASE_URL'))
+db_config['ATOMIC_REQUESTS'] = True
+
 if not DEBUG: 
   DATABASES = {
-   'default':{
-        'ENGINE': 'django.db.backends.mysql',
-        'OPTIONS':{
-            'read_default_file': '/etc/mysql/my.cnf',
-        },
-        'name': 'heroku_e51e7f5b0b3de84',
-        'username': 'bc05818b8689d9',
-        'password': '0996cb18',
-        'HOST': 'us-cdbr-east-06.cleardb.net',
-        # 'PORT': '3306'
-        }
+#    'default':{
+#         'ENGINE': 'django.db.backends.mysql',
+#         'OPTIONS':{
+#             'read_default_file': '/etc/mysql/my.cnf',
+#         },
+#         'name': 'heroku_e51e7f5b0b3de84',
+#         'username': 'bc05818b8689d9',
+#         'password': '0996cb18',
+#         'HOST': 'us-cdbr-east-06.cleardb.net',
+#         # 'PORT': '3306'
+#         }
+       
+
+    'default': db_config,
+
  
     }
 
