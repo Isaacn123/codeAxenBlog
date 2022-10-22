@@ -91,10 +91,13 @@ WSGI_APPLICATION = 'Flists.wsgi.application'
 # mysql://username:password@cleardb-cdbr-endpoint.cleardb.com/database_name
 
 db_config = dj_database_url.config(default=os.environ.get('CLEARDB_DATABASE_URL'))
-db_config['ATOMIC_REQUESTS'] = True
+# db_config['ATOMIC_REQUESTS'] = True
 
 if not DEBUG: 
-  DATABASES = {
+    DATABASES = {}
+    prod_db = dj_database_url.config(env="CLEARDB_DATABASE_URL", conn_max_age=500)
+    DATABASES['default'].update(prod_db)
+#   DATABASES = {
 #    'default':{
 #         'ENGINE': 'django.db.backends.mysql',
 #         'OPTIONS':{
@@ -108,10 +111,10 @@ if not DEBUG:
 #         }
        
 
-    'default': db_config,
+    # 'default': db_config,
 
  
-    }
+    # }
 
 else: 
     DATABASES = {
