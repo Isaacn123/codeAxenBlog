@@ -94,12 +94,9 @@ db_config = dj_database_url.config(default=os.environ.get('CLEARDB_DATABASE_URL'
 # db_config['ATOMIC_REQUESTS'] = True
 
 if not DEBUG: 
-    prod_db = dj_database_url.config(env="CLEARDB_DATABASE_URL", conn_max_age=500)
-    DATABASES = {
-    'default': prod_db
-    }
+   DATABASES['default'] = dj_database_url.config(default=os.environ.get('CLEARDB_DATABASE_URL'),conn_max_age=600)
     
-    DATABASES['default'].update(prod_db)
+    # DATABASES['default'].update(prod_db)
 #   DATABASES = {
 #    'default':{
 #         'ENGINE': 'django.db.backends.mysql',
