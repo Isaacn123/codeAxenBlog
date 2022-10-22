@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -77,7 +78,11 @@ WSGI_APPLICATION = 'Flists.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
+# mysql://bc05818b8689d9:0996cb18@us-cdbr-east-06.cleardb.net/heroku_e51e7f5b0b3de84?reconnect=true
+# mysql://username:password@cleardb-cdbr-endpoint.cleardb.com/database_name
+DATABASES['default'] = dj_database_url.config(
+    default='mysql://bc05818b8689d9:0996cb18@us-cdbr-east-06.cleardb.net/heroku_e51e7f5b0b3de84?reconnect=true',
+)
 DATABASES = {
     # 'default': {
     #     'ENGINE': 'django.db.backends.sqlite3',
