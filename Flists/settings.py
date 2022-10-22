@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+from optparse import Option
 from pathlib import Path
 import os
 import dj_database_url
@@ -103,7 +104,7 @@ if not DEBUG:
          }
       }
     
-      DATABASES['default']=dj_database_url.config(engine='django.db.backends.mysql',default=os.environ.get('CLEARDB_DATABASE_URL'),conn_max_age=600)
+      DATABASES['default']=dj_database_url.config(default=os.environ.get('CLEARDB_DATABASE_URL'),conn_max_age=600, option= {'reconnect': 'true'}, engine= 'django.db.backends.mysql')
     #   Data
     # DATABASES = {
     #     'default': dj_database_url.config(env="CLEARDB_DATABASE_URL",conn_max_age=600)
