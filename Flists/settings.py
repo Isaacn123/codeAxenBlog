@@ -103,7 +103,7 @@ if not DEBUG:
          }
       }
     
-      DATABASES['default']=dj_database_url.config(os.environ.get('CLEARDB_DATABASE_URL'),conn_max_age=600)
+      DATABASES['default']=dj_database_url.config(engine='django.db.backends.mysql',default=os.environ.get('CLEARDB_DATABASE_URL'),conn_max_age=600)
     #   Data
     # DATABASES = {
     #     'default': dj_database_url.config(env="CLEARDB_DATABASE_URL",conn_max_age=600)
@@ -150,7 +150,7 @@ else:
       }
  
     }
-    DATABASES['default']=dj_database_url.config(env="CLEARDB_DATABASE_URL",conn_max_age=600)
+    # DATABASES['default']=dj_database_url.config(env="CLEARDB_DATABASE_URL",conn_max_age=600)
     print(DATABASES)
 
 
