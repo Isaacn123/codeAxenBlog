@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
-import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -21,12 +20,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-53^%3m*04+k9#c5h^p4a+*h+5(oguje+b#%qv1=iz=e!)iapp4'
+# SECRET_KEY = 'django-insecure-53^%3m*04+k9#c5h^p4a+*h+5(oguje+b#%qv1=iz=e!)iapp4'
+
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False # debug is disabled for production
+ # debug is disabled for production
 
-ALLOWED_HOSTS = ['127.0.0.1','codeaxen.herokuapp.com']
+
+# DEBUG = env('DEBUG')
+
+DEBUG = str(os.environ.get('DEBUG')) == "1"
+
+ALLOWED_HOSTS = []
+if not DEBUG:
+    ALLOWED_HOSTS += [os.environ.get('ALLOWED_HOST')]
 
 
 # Application definition
@@ -80,10 +88,25 @@ WSGI_APPLICATION = 'Flists.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 # mysql://bc05818b8689d9:0996cb18@us-cdbr-east-06.cleardb.net/heroku_e51e7f5b0b3de84?reconnect=true
 # mysql://username:password@cleardb-cdbr-endpoint.cleardb.com/database_name
-DATABASES['default'] = dj_database_url.config(
-    default='mysql://bc05818b8689d9:0996cb18@us-cdbr-east-06.cleardb.net/heroku_e51e7f5b0b3de84?reconnect=true',
-)
-DATABASES = {
+
+if not DEBUG: 
+  DATABASES = {
+   'default':{
+        'ENGINE': 'django.db.backends.mysql',
+        'OPTIONS':{
+            'read_default_file': '/etc/mysql/my.cnf',
+        },
+        'name': 'heroku_e51e7f5b0b3de84',
+        'username': 'bc05818b8689d9',
+        'password': '0996cb18',
+        'HOST': 'us-cdbr-east-06.cleardb.net',
+        # 'PORT': '3306'
+        }
+ 
+    }
+
+else: 
+    DATABASES = {
     # 'default': {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': BASE_DIR / 'db.sqlite3',
@@ -98,8 +121,9 @@ DATABASES = {
         'PASSWORD': '',
         'HOST': '127.0.0.1',
         'PORT': '3306'
+      }
+ 
     }
-}
 
 
 # Password validation
