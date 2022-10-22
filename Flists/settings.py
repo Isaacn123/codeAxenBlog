@@ -104,7 +104,7 @@ if not DEBUG:
          }
       }
     
-      DATABASES['default']=dj_database_url.config(default=os.environ.get('CLEARDB_DATABASE_URL'),conn_max_age=600, option= {'reconnect': 'true'}, engine= 'django.db.backends.mysql')
+      DATABASES['default']=dj_database_url.config(default=os.environ.get('CLEARDB_DATABASE_URL'),conn_max_age=600, engine= 'django.db.backends.mysql')
     #   Data
     # DATABASES = {
     #     'default': dj_database_url.config(env="CLEARDB_DATABASE_URL",conn_max_age=600)
