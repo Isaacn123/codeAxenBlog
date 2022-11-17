@@ -43,6 +43,7 @@ print(SECRET_KEY)
 
 if not DEBUG:
     ALLOWED_HOSTS =[os.environ.get('ALLOWED_HOST')]
+    print(ALLOWED_HOSTS)
     
 else:
     ALLOWED_HOSTS = []
