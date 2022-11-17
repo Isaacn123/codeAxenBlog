@@ -101,12 +101,17 @@ if not DEBUG:
         'OPTIONS':{
             'read_default_file': '/etc/mysql/my.cnf',
            },
+        'NAME': 'flitsAdmin',
+        'USER': 'root',
+        'PASSWORD': '123456',
+        'HOST': '127.0.0.1',
+        'PORT': '3306'
          }
       }
     
-      prod_db=dj_database_url.config(env="JAWSDB_URL",conn_max_age=600)
-      DATABASES['default'].update(prod_db)
-      print(DATABASES)
+    #   prod_db=dj_database_url.config(env="JAWSDB_URL",conn_max_age=600)
+    #   DATABASES['default'].update(prod_db)
+    #   print(DATABASES)
 
     #   Data
     # DATABASES = {
