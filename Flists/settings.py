@@ -34,7 +34,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 DEBUG = str(os.environ.get('DEBUG')) == "1"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 if not DEBUG:
     ALLOWED_HOSTS += [os.environ.get('ALLOWED_HOST')]
 
