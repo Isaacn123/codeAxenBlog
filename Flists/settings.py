@@ -14,9 +14,11 @@ from optparse import Option
 from pathlib import Path
 import os
 import dj_database_url
+import dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+dotenv.read_dotenv(os.path.join(BASE_DIR, '.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -32,7 +34,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # DEBUG = env('DEBUG')
 
-DEBUG = str(os.environ.get('DEBUG')) == "1"
+DEBUG = str(os.environ.get('DEBUG')) == '1'
+print(SECRET_KEY)
 
 # ALLOWED_HOSTS = ['*']
 # if not DEBUG:
@@ -103,6 +106,7 @@ db_config = dj_database_url.config(default=os.environ.get('CLEARDB_DATABASE_URL'
 # db_config['ATOMIC_REQUESTS'] = True
 
 if not DEBUG: 
+      print(DEBUG)
       DATABASES = {
       'default':{
         'ENGINE': 'django.db.backends.mysql',
